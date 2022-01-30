@@ -50,7 +50,7 @@
       async submit(event) {
         console.log(event);
         try {
-          let resp = await axios.post(`${this.$config.apiUrl}/`, {
+          let resp = await axios.post(`${this.$config.apiUrl}/submit`, {
             secret_data: this.secure_data
           });
           this.response = resp.data

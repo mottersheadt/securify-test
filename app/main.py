@@ -15,7 +15,7 @@ app.logger.setLevel(logging.DEBUG)
 # enable CORS
 CORS(app, resources={'/*': {'origins': '*'}})
 
-@app.route('/', methods=['POST', 'GET'])
-def receive():
+@app.route('/submit', methods=['POST', 'GET'])
+def submit():
   result = business.receive(request.json['secret_data'])
   return jsonify(result)
