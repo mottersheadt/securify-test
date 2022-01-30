@@ -12,26 +12,28 @@
         <button class="btn btn-primary" @click="submit">Securely Submit</button>
       </div>
     </div>
-    <div v-if="response">
+    <div v-if="token">
       <div class="row mt-3">
         <div class="col">
           <div class="bg-light p-3">
-            {{response}}
+            {{token}}
           </div>
         </div>
       </div>
       <div class="row mt-3">
         <div class="col">
-          <button class="btn btn-secondary" @click="reset">Reset</button>
+          <button class="btn btn-warning" @click="retrieve">Securely Retrieve</button>
         </div>
       </div>
     </div>
 
-    <ul class="mt-5">
-      <li v-for="company in companies" :key="company.id">
-        {{ company.name }}
-      </li>
-    </ul>
+    <div class="row mt-3" v-if="secure_response">
+      <div class="col">
+        <div class="bg-light p-3">
+          {{secure_response}}
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -42,7 +44,8 @@
     data() {
       return {
         secure_data: null,
-        response: null
+        token: null,
+        secure_response: null
       }
     },
 
@@ -50,19 +53,27 @@
       async submit(event) {
         console.log(event);
         try {
-          let resp = await axios.post(`${this.$config.apiUrl}/submit`, {
+          let resp = await axios.post(`${this.$config.secureApiUrl}/submit`, {
             secret_data: this.secure_data
           });
-          this.response = resp.data
+          this.token = resp.data
         }
         catch(error)
         {
-          this.response = error;
+          this.token = error;
         }
       },
 
-      reset() {
-        this.response = null
+      async retrieve() {
+        try {
+          console.log(this.token)
+          let resp = await axios.get(`${this.$config.apiUrl}/retrieve?token=${this.token}`);
+          this.secure_response = resp.data
+        }
+        catch(error)
+        {
+          this.secure_response = error;
+        }
       }
 
     }
