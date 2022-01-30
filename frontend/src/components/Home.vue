@@ -4,21 +4,26 @@
     
     <div class="row">
       <div class="col">
-        <input v-model="startDate" type="date" class="form-control" placeholder="Start Date" aria-label="Start Date">
-      </div>
-      <div class="col">
-        <input v-model="endDate" type="date" class="form-control" placeholder="End Date" aria-label="End Date">
+        <input v-model="secure_data" type="text" class="form-control" placeholder="Enter Secure Data">
       </div>
     </div>
     <div class="row mt-3">
       <div class="col">
-        <button class="btn btn-primary" @click="submit">load data</button>
-        <button class="btn btn-warning ml-2" @click="reset">reset data</button>
+        <button class="btn btn-primary" @click="submit">Securely Submit</button>
       </div>
     </div>
-    <div class="mt-3">
-      <div class="bg-light p-3">
-        {{response}}
+    <div v-if="response">
+      <div class="row mt-3">
+        <div class="col">
+          <div class="bg-light p-3">
+            {{response}}
+          </div>
+        </div>
+      </div>
+      <div class="row mt-3">
+        <div class="col">
+          <button class="btn btn-secondary" @click="reset">Reset</button>
+        </div>
       </div>
     </div>
 
@@ -34,37 +39,26 @@
   import axios from 'axios';
 
   export default {
-    props: ['category'],
-    async created() {
-      const companies = await axios.get(`${this.$config.apiUrl}/companies`);
-      if (companies.data) {
-        console.log(companies.data)
-        this.companies = companies.data;
-      }
-    },
-    
     data() {
       return {
-        companies: null,
-        response: null,
-        startDate: null,
-        endDate: null
+        secure_data: null
       }
     },
 
     methods: {
       async submit(event) {
         console.log(event);
-        let resp = await axios.post(`${this.$config.apiUrl}/submit?name=tester`, {
-          card_cvc: "123",
-          account_number: "234522134",
-          ssn: "1234",
-          card_number: "16661",
-          startDate: this.startDate,
-          endDate: this.endDate,
-        });
-        console.log(resp)
-        this.response = resp.data
+        try {
+          let resp = await axios.post(`${this.$config.apiUrl}/submit`, {
+            data: this.secure_data
+          });
+          console.log(resp)
+          this.response = resp.data
+        }
+        catch(error)
+        {
+          this.response = error;
+        }
       },
 
       reset() {

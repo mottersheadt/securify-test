@@ -15,17 +15,11 @@ app.logger.setLevel(logging.DEBUG)
 # enable CORS
 CORS(app, resources={'/*': {'origins': '*'}})
 
-@app.route('/companies', methods=['GET'])
-def get_companies():
-  return jsonify(business.companies)
-
-@app.route('/submit', methods=['POST', 'GET'])
+@app.route('/', methods=['POST', 'GET'])
 def submit_data():
-  name = request.args.get('name')
   count = business.submit(request.args, request.json)
   app.logger.info(request.json)
   return jsonify({
     "count": count,
-    "name": name,
     "body": request.json
   })
