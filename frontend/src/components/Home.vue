@@ -41,7 +41,8 @@
   export default {
     data() {
       return {
-        secure_data: null
+        secure_data: null,
+        response: null
       }
     },
 
@@ -49,10 +50,9 @@
       async submit(event) {
         console.log(event);
         try {
-          let resp = await axios.post(`${this.$config.apiUrl}/submit`, {
-            data: this.secure_data
+          let resp = await axios.post(`${this.$config.apiUrl}/`, {
+            secret_data: this.secure_data
           });
-          console.log(resp)
           this.response = resp.data
         }
         catch(error)

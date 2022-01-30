@@ -5,7 +5,6 @@ from . import client
 
 log = logging.getLogger('app.main.business')
 
-def submit(unsecure_data):
-    log.info("Submitting unsecure data")
-    secure_data = client.secure(unsecure_data)
+def receive(secure_data):
+    log.info("Received secured data", secure_data)
     return secure_data
