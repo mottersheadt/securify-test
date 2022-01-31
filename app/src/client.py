@@ -20,5 +20,6 @@ class VgsClient:
                                 json={'secret_data': token},
                                 verify=self.key_location)
         log.info("Response code: {0}", response.status_code) 
-        log.info("Response json: {0}", response.json) 
-        return response.json
+        data = response.json()
+        log.info("Response json: {0}", data) 
+        return data
