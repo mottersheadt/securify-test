@@ -12,7 +12,7 @@ def retrieve(secure_data):
         os.environ['VGS_USERNAME'],
         os.environ['VGS_PASSWORD'],
         os.environ['VGS_TENANT_ID'],
-        '/keys/outbound-cert.pem',
+        '/app/keys/outbound-cert.pem',
         os.environ['VGS_PROXY_BASE'])
     retrieved_data = client.retrieve(secure_data)
     return retrieved_data
