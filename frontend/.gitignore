@@ -13,8 +13,6 @@ yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
 
-assets/config.json
-
 # Editor directories and files
 .idea
 .vscode
@@ -23,3 +21,6 @@ assets/config.json
 *.njsproj
 *.sln
 *.sw?
+
+
+**/config.json
