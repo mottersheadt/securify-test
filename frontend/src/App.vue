@@ -2,7 +2,7 @@
   <div>
     <Navbar></Navbar>
     <div class="container">
-      <Home v-if="route == '/' || !route" msg="Welcome to Your Vue.js App"/>
+      <Home v-if="route == '/' || route == '/index.html' || !route" msg="Welcome to Your Vue.js App"/>
       <Submit v-if="route == '/submit'" msg="Welcome to Your Vue.js App"/>
     </div>
   </div>

@@ -7,7 +7,7 @@ log = logging.getLogger('app.main.client')
 
 class VgsClient:
     def __init__(self, username, password, tenant_id, key_location, proxy_base):
-        self.proxy_url = "https://{0}:{1}@{2}.{3}".format(
+        self.proxy_url = "http://{0}:{1}@{2}.{3}".format(
             username, password, tenant_id, proxy_base)
         log.info("PROXY_URL: {0}".format(self.proxy_url))
         self.key_location = key_location
