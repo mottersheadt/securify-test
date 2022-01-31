@@ -17,9 +17,9 @@ CORS(app, resources={'/*': {'origins': '*'}})
 
 @app.route('/submit', methods=['POST', 'GET'])
 def submit():
+  return "testing"
   result = request.json['secret_data']
   return jsonify(result)
-
 
 @app.route('/retrieve', methods=['GET'])
 def retrieve():
