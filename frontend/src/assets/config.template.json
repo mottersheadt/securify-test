@@ -1,0 +1,4 @@
+{
+    "apiUrl": "http://127.0.0.1:5000",
+    "secureApiUrl": "https://{{VGS_TENANT_ID}}.sandbox.verygoodproxy.com"
+}

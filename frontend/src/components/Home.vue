@@ -1,35 +1,25 @@
 <template>
   <div class="mt-5">
-    <h1>Home</h1>
-    
     <div class="row">
       <div class="col">
-        <input v-model="secure_data" type="text" class="form-control" placeholder="Enter Secure Data">
-      </div>
-    </div>
-    <div class="row mt-3">
-      <div class="col">
+        <h1>Store Data</h1>
+        <p>Enter a value in the field below and press "Securely Store" to store as sensitive data and retrieve a reference token.</p>
+        <input v-model="secure_data" type="text" class="form-control mb-3" placeholder="Enter Secure Data">
         <button class="btn btn-primary" @click="submit">Securely Submit</button>
-      </div>
-    </div>
-    <div v-if="token">
-      <div class="row mt-3">
-        <div class="col">
+        <div v-if="token">
           <div class="bg-light p-3">
-            {{token}}
+            Reference token: {{token}}
           </div>
         </div>
       </div>
-      <div class="row mt-3">
-        <div class="col">
-          <button class="btn btn-warning" @click="retrieve">Securely Retrieve</button>
-        </div>
-      </div>
-    </div>
-
-    <div class="row mt-3" v-if="secure_response">
+      
       <div class="col">
-        <div class="bg-light p-3">
+        <h1>Retrieve Data</h1>
+        <p>Enter a reference token in the field below and press "Securely Retrieve" to retrieve sensitive data.</p>
+        <input v-model="retrieve_token" type="text" class="form-control mb-3" placeholder="Enter Secure Data">
+        
+        <button class="btn btn-warning mb-3" @click="retrieve">Securely Retrieve</button>
+        <div v-if="secure_response" class="bg-light p-3">
           {{secure_response}}
         </div>
       </div>

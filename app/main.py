@@ -24,6 +24,4 @@ def submit():
 def retrieve():
   token = request.args['token']
   retrieved = business.retrieve(token)
-  return jsonify({
-    'secret_data': retrieved
-  })
+  return retrieved

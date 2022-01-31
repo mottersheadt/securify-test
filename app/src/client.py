@@ -2,6 +2,7 @@
 import logging
 import os
 import requests
+import json
 
 log = logging.getLogger('app.main.client')
 
@@ -20,6 +21,7 @@ class VgsClient:
                                 json={'secret_data': token},
                                 verify=self.key_location)
         log.info("Response code: {0}", response.status_code) 
-        data = response.json()
-        log.info("Response json: {0}", data) 
-        return data
+        json_resp = response.json()['data']
+        log.info("Response json: {0}".format(json_resp))
+        data = json.loads(json_resp)
+        return data['secret_data']
