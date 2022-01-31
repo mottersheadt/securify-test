@@ -19,5 +19,6 @@ class VgsClient:
         response = requests.post('https://echo.apps.verygood.systems/post',
                                 json={'secret_data': token},
                                 verify=self.key_location)
-        log.info("Response:")
-        log.info(response)
+        log.info("Response code: {0}", response.status_code) 
+        log.info("Response json: {0}", response.json) 
+        return response.json
