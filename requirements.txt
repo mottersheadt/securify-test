@@ -1,5 +1,5 @@
 gunicorn
 requests
-flask
+flask==2.0.0
 flask_cors
 python-dotenv

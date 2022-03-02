@@ -13,7 +13,7 @@ def retrieve(secure_data):
         os.environ['VGS_USERNAME'],
         os.environ['VGS_PASSWORD'],
         os.environ['VGS_TENANT_ID'],
-        '/app/keys/outbound-cert.pem',
+        os.getcwd() + '/app/keys/outbound-cert.pem',
         os.environ['VGS_PROXY_BASE'])
     retrieved_data = client.retrieve(secure_data)
     return retrieved_data
@@ -22,11 +22,11 @@ def retrieve(secure_data):
 # Require that the cert is created and stored so we can use it when reaching out to outbound target.
 # Because the python requests library 
 def load_cert():
-  cert_file = '/app/keys/outbound-cert.pem'
-  
-  if not os.path.exists(cert_file):
-    logging.info("Loading cert...")
-    os.makedirs(os.path.dirname(cert_file), exist_ok=True)
+    cert_file = os.getcwd() + '/app/keys/outbound-cert.pem'
+    
+    if not os.path.exists(cert_file):
+        logging.info("Loading cert...")
+        os.makedirs(os.path.dirname(cert_file), exist_ok=True)
     with open(cert_file, "w") as f:
-      logging.info("Wrote new cert to {0}".format(cert_file))
-      f.write(os.environ['VGS_OUTBOUND_CERT'])
+        logging.info("Wrote new cert to {0}".format(cert_file))
+        f.write(os.environ['VGS_OUTBOUND_CERT'])

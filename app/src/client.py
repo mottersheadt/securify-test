@@ -18,8 +18,8 @@ class VgsClient:
         # TODO: Change how we are setting this proxy...
         os.environ['HTTPS_PROXY'] = self.proxy_url
         response = requests.post('https://echo.apps.verygood.systems/post',
-                                json={'secret_data': token},
-                                verify=self.key_location)
+                                 json={'secret_data': token},
+                                 verify=self.key_location)
         log.info("Response code: {0}", response.status_code) 
         json_resp = response.json()['data']
         log.info("Response json: {0}".format(json_resp))
